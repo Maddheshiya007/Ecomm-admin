@@ -39,8 +39,8 @@ const AddProduct = () => {
             console.log(secure_url, public_id);
             await fetch(`${import.meta.env.VITE_SERVER_URL}/addproduct`, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
-                    mode: 'no-cors',
                     Accept: "application/json",
                     "Access-Control-Allow-Origin": "*",
                     'Content-Type': 'application/json',
