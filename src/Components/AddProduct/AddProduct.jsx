@@ -38,8 +38,8 @@ const AddProduct = () => {
             product.image_id = public_id;
             console.log(secure_url, public_id);
             await fetch(`${import.meta.env.VITE_SERVER_URL}/addproduct`, {
-                method: 'POST',
                 mode: 'no-cors',
+                method: 'POST',
                 headers: {
                     Accept: "application/json",
                     "Access-Control-Allow-Origin": "*",
