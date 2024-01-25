@@ -29,19 +29,21 @@ const AddProduct = ()=>{
         formdata.append('file',image);
         formdata.append('upload_preset',`${import.meta.env.VITE_UPLOAD_PRESET}`);
         formdata.append('cloud_name',`${import.meta.env.VITE_CLOUD_NAME}` )
-       const {url, public_id} = await fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,{
+       const {secure_url, public_id} = await fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`,{
     method:'POST',
     body:formdata
         }).then((res)=>res.json());
-        if(url){
-            product.image = url;
+        if(secure_url){
+            product.image = secure_url;
             product.image_id = public_id;
-            console.log(url,public_id);
+            console.log(secure_url,public_id);
             await fetch(`${import.meta.env.VITE_SERVER_URL}/addproduct`,{
                 method:'POST',
                 headers:{
                     Accept:"application/json",
-                    "Content-type":"application/json"
+                    "Access-Control-Allow-Origin": "*",
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH"
                 },
                 body:JSON.stringify(product)
             }).then((res)=>res.json()).then((data)=>data.success?alert("Product Added"):alert("Failed"))
