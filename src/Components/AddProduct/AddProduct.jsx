@@ -43,10 +43,11 @@ const AddProduct = () => {
             console.log(secure_url, public_id);
 
             await fetch(`${import.meta.env.VITE_SERVER_URL}/addproduct`, {
+                // mode:'no-cors',
                 method: 'POST',
                 headers: {
-                    Accept: "application/json",
-                    'Content-Type': 'application/json',
+                    Accept: 'application/form-data',
+                'Content-Type': "application/json"
                 },
                 body: JSON.stringify(product)
             }).then((res) => res.json()).then((data) => data.success ? alert("Product Added") : alert("Failed"))
